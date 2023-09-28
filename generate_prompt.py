@@ -14,7 +14,7 @@ for i, file_name in enumerate(files, start=1):
         
     prompt = prompt + "\n" + f"{i}." + transcript
     
-prompt += "\nI want to read these transcripts and extract the essential details of each candidate such as candidate name, education, work experience, relevant skills and any other details you deem important. Additionally, I want you to judge the language proficiency of each candidate keeping in mind factors like vocabulary, flow of thoughts, and grammar and then categorize the proficiency out of great, good, satisfactory, bad, very bad. Create a sql table containing the candidate name, education, work experience, relevant skills, other details, language proficiency of each candidate. In entries of education, work experience, relevant skills and other details, if there are more than one sentence, I want the delimiter to be “.” And not “,”"
+prompt += "\nI want to read these transcripts and extract the essential details of each candidate such as candidate name, education, work experience, relevant skills and any other details you deem important. Additionally, I want you to judge the language proficiency of each candidate keeping in mind factors like vocabulary, flow of thoughts, and grammar and then categorize the proficiency out of great, good, satisfactory, bad, very bad. Create a csv file containing the candidate name, education, work experience, relevant skills, other details, language proficiency of each candidate. In entries of education, work experience, relevant skills and other details, if there are more than one sentence, I want the delimiter to be “.” And not “,”"
     
 file_path = "prompt.txt"
 

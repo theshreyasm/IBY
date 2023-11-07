@@ -39,6 +39,19 @@ for i in folder_names:
     plt.savefig(f'candidate_details/{i}/emotion.png')
     plt.show()
     
+    df = pd.merge(df_emotion, df_gaze, on='image_seq', how='inner')
+    df.drop('movie_id_y', axis=1, inplace=True)
+    df.rename(columns={'movie_id_x': 'movie_id'}, inplace=True)
+    
+    df_correlation = df[['angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral', 'gaze', 'eye_offset']]
+    correlation_matrix = df_correlation.corr()
+    
+    plt.figure(figsize=(10, 8))
+    plt.title(f"Correlation heatmap for Candidate {i}", fontweight = 'bold')
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', square=True)
+    plt.savefig(f'candidate_details/{i}/correlation.png')
+    plt.show()
+    
     gaze = df_gaze["gaze"]
     image_seq = df_gaze["image_seq"]
     percentage_gaze = (sum(gaze) / len(gaze)) * 100
@@ -55,15 +68,4 @@ for i in folder_names:
     plt.savefig(f'candidate_details/{i}/gaze.png')
     plt.show()
     
-    df = pd.merge(df_emotion, df_gaze, on='image_seq', how='inner')
-    df.drop('movie_id_y', axis=1, inplace=True)
-    df.rename(columns={'movie_id_x': 'movie_id'}, inplace=True)
     
-    df_correlation = df[['angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral', 'gaze', 'eye_offset']]
-    correlation_matrix = df_correlation.corr()
-    
-    plt.figure(figsize=(10, 8))
-    plt.title(f"Correlation heatmap for Candidate {i}", fontweight = 'bold')
-    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', square=True)
-    plt.savefig(f'candidate_details/{i}/correlation.png')
-    plt.show()
